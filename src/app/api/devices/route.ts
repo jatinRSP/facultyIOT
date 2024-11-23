@@ -4,12 +4,16 @@ import Device from '@/models/Device'
 
 export async function GET() {
   try {
-    await dbConnect()
-    const devices = await Device.find({}).select('name mac -_id').lean()
-    return NextResponse.json(devices)
+    await dbConnect();
+
+    // fetch devices which has macid
+    const devices = await Device.find({ mac: { $ne: null } });
+
+    let data = devices || [];
+    return NextResponse.json({ status: "success", data: devices}, { status: 200 })
   } catch (error) {
-    console.error('Error fetching devices:', error)
-    return NextResponse.json({ error: 'Failed to fetch devices' }, { status: 500 })
+    console.error('Login error:', error)
+    return NextResponse.json({ error: 'An error occurred during login' }, { status: 500 })
   }
 }
 

@@ -1,6 +1,7 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useEffect, useCallback, useState } from "react";
+import { redirect } from "next/navigation";
 import { useRegister } from "@/hooks/useRegister";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -15,6 +16,7 @@ import { Label } from "@/components/ui/label";
 import { AlertCircle, CheckCircle2 } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
+
 export default function RegisterForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -28,6 +30,16 @@ export default function RegisterForm() {
     },
     [email, password, token]
   );
+
+  useEffect(() => {
+    if (success) {
+      setEmail("");
+      setPassword("");
+      setToken("");
+
+      redirect("/login");
+    }
+  }, [success]);
 
   return (
     <Card>

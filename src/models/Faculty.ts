@@ -8,6 +8,7 @@ const FacultySchema = new mongoose.Schema({
   facultyId: { type: String, required: true, unique: true },
   mac: { type: String },
   password: { type: String, required: true },
+  availability: { type: Boolean, default: false },
   role: { type: String, default: 'faculty', enum: ['faculty', 'admin'] },
 })
 

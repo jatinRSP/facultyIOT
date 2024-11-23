@@ -32,8 +32,11 @@ export default function DeviceSelector({ onSelect, onClose }: DeviceSelectorProp
           throw new Error('Failed to fetch devices')
         }
         const data = await response.json()
-        setDevices(data)
-        setFilteredDevices(data)
+
+        console.log(data)
+
+        setDevices(data.data)
+        setFilteredDevices(data.data)
       } catch (error) {
         console.error('Error fetching devices:', error)
         setError('Failed to load devices. Please try again.')
@@ -52,6 +55,7 @@ export default function DeviceSelector({ onSelect, onClose }: DeviceSelectorProp
         device.mac.toLowerCase().includes(searchTerm.toLowerCase())
     )
     setFilteredDevices(filtered)
+    console.log(filtered)
   }, [searchTerm, devices])
 
   useEffect(() => {
@@ -83,7 +87,7 @@ export default function DeviceSelector({ onSelect, onClose }: DeviceSelectorProp
                   className="w-full justify-start"
                   onClick={() => onSelect(device.mac)}
                 >
-                  {device.name} - {device.mac}
+                  {device.name} - {device.mac || "No Mac Address"}
                 </Button>
               ))}
             </div>

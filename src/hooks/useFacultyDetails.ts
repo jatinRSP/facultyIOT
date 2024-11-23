@@ -20,7 +20,7 @@ export function useFacultyDetails() {
     setSuccess(false)
 
     try {
-      const response = await fetch('/api/faculty-details', {
+      const response = await fetch('/api/faculty/addDetails', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
