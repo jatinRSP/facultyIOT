@@ -7,7 +7,8 @@ const FacultySchema = new mongoose.Schema({
   cabinLocation: { type: String },
   facultyId: { type: String, required: true, unique: true },
   mac: { type: String },
-  password: { type: String, required: true }
+  password: { type: String, required: true },
+  role: { type: String, default: 'faculty', enum: ['faculty', 'admin'] },
 })
 
 export default mongoose.models.Faculty || mongoose.model('Faculty', FacultySchema)
