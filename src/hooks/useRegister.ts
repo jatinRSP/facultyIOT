@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react'
 
 interface RegisterData {
-  facultyId: string
+  email: string
   password: string
   token: string
 }

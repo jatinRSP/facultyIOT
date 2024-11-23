@@ -1,23 +1,28 @@
-import './globals.css'
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+"use client";
 
-const inter = Inter({ subsets: ['latin'] })
+import "./globals.css";
+import { useEffect } from "react";
+import { Inter } from "next/font/google";
+import OfflineNotification from "@/components/OfflineNotification";
+import { registerServiceWorker } from "@/lib/RegisterSW";
 
-export const metadata: Metadata = {
-  title: 'Faculty Management System',
-  description: 'A system for managing faculty registration and details',
-}
+const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
+  useEffect(() => {
+    registerServiceWorker();
+  }, []);
+
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <OfflineNotification />
+        {children}
+      </body>
     </html>
-  )
+  );
 }
-

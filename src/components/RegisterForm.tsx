@@ -1,24 +1,33 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import { useRegister } from '@/hooks/useRegister'
-import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
-import { Label } from '@/components/ui/label'
-import { AlertCircle, CheckCircle2 } from 'lucide-react'
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
+import { useCallback, useState } from "react";
+import { useRegister } from "@/hooks/useRegister";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
+import { AlertCircle, CheckCircle2 } from "lucide-react";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 export default function RegisterForm() {
-  const [facultyId, setFacultyId] = useState('')
-  const [password, setPassword] = useState('')
-  const [token, setToken] = useState('')
-  const { register, isLoading, error, success } = useRegister()
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [token, setToken] = useState("");
+  const { register, isLoading, error, success } = useRegister();
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    await register({ facultyId, password, token })
-  }
+  const handleSubmit = useCallback(
+    async (e: React.FormEvent) => {
+      e.preventDefault();
+      await register({ email, password, token });
+    },
+    [email, password, token]
+  );
 
   return (
     <Card>
@@ -28,12 +37,12 @@ export default function RegisterForm() {
       <form onSubmit={handleSubmit}>
         <CardContent className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="facultyId">Faculty ID</Label>
+            <Label htmlFor="facultyId">Email</Label>
             <Input
               id="facultyId"
-              type="text"
-              value={facultyId}
-              onChange={(e) => setFacultyId(e.target.value)}
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               required
             />
           </div>
@@ -60,8 +69,16 @@ export default function RegisterForm() {
         </CardContent>
         <CardFooter>
           <Button type="submit" className="w-full" disabled={isLoading}>
-            {isLoading ? 'Registering...' : 'Register'}
+            {isLoading ? "Registering..." : "Register"}
           </Button>
+        </CardFooter>
+        <CardFooter>
+          <div className="text-sm text-gray-600">
+            Already have an account?{" "}
+            <a href="/login" className="text-blue-600">
+              Login
+            </a>
+          </div>
         </CardFooter>
       </form>
       {error && (
@@ -79,6 +96,5 @@ export default function RegisterForm() {
         </Alert>
       )}
     </Card>
-  )
+  );
 }
-

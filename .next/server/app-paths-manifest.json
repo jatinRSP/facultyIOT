@@ -1,5 +1,14 @@
 {
   "/not-found": "app/not-found.js",
+<<<<<<< HEAD
   "/api/admin/add-faculty/route": "app/api/admin/add-faculty/route.js",
   "/page": "app/page.js"
+=======
+  "/login/page": "app/login/page.js",
+  "/register/page": "app/register/page.js",
+  "/page": "app/page.js",
+  "/api/login/route": "app/api/login/route.js",
+  "/faculty/dashboard/page": "app/faculty/dashboard/page.js",
+  "/faculty/faculty-details/page": "app/faculty/faculty-details/page.js"
+>>>>>>> 47d3737a9dab19e8bd03f1864c2a899de67a5c2c
 }
