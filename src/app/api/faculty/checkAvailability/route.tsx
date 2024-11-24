@@ -18,8 +18,8 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ status: "success", data: { isAvailable: faculty.availability, message:message } }, { status: 201 })
   } catch (error) {
-    console.error('Error change faculty availability:', error)
-    return NextResponse.json({ error: 'Failed to changes faculty availability' }, { status: 500 })
+    console.error('Error fetch faculty availability:', error)
+    return NextResponse.json({ error: 'Failed to fetch faculty availability' }, { status: 500 })
   }
 }
 
